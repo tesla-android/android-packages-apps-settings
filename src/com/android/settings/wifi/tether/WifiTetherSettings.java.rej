@@ -1,0 +1,17 @@
+diff a/src/com/android/settings/wifi/tether/WifiTetherSettings.java b/src/com/android/settings/wifi/tether/WifiTetherSettings.java	(rejected hunks)
+@@ -227,7 +219,6 @@ private void updateDisplayWithNewConfig() {
+         use(WifiTetherSSIDPreferenceController.class).updateDisplay();
+         use(WifiTetherSecurityPreferenceController.class).updateDisplay();
+         use(WifiTetherPasswordPreferenceController.class).updateDisplay();
+-        use(WifiTetherMaximizeCompatibilityPreferenceController.class).updateDisplay();
+     }
+ 
+     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+@@ -241,7 +232,6 @@ public List<String> getNonIndexableKeys(Context context) {
+                         keys.add(KEY_WIFI_TETHER_NETWORK_NAME);
+                         keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
+                         keys.add(KEY_WIFI_TETHER_AUTO_OFF);
+-                        keys.add(KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+                     }
+ 
+                     // Remove duplicate
