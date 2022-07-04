@@ -139,7 +139,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         switchBar.setTitle(getContext().getString(R.string.use_wifi_hotsopt_main_switch_title));
         mSwitchBarController = new WifiTetherSwitchBarController(activity, switchBar);
         getSettingsLifecycle().addObserver(mSwitchBarController);
-        switchBar.show();
+        switchBar.hide();
     }
 
     @Override
