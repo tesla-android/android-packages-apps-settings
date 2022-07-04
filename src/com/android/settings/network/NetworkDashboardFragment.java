@@ -93,8 +93,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
             MobilePlanPreferenceHost mobilePlanHost) {
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, mobilePlanHost);
-        final InternetPreferenceController internetPreferenceController =
-                new InternetPreferenceController(context, lifecycle);
 
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
@@ -114,9 +112,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
-        if (internetPreferenceController != null) {
-            controllers.add(internetPreferenceController);
-        }
         controllers.add(privateDnsPreferenceController);
         controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
         return controllers;
