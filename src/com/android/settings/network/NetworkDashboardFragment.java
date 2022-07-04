@@ -69,7 +69,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        use(AirplaneModePreferenceController.class).setFragment(this);
         getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
     }
 
@@ -93,29 +92,22 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, MetricsFeatureProvider metricsFeatureProvider, Fragment fragment,
             MobilePlanPreferenceHost mobilePlanHost) {
-        final MobilePlanPreferenceController mobilePlanPreferenceController =
-                new MobilePlanPreferenceController(context, mobilePlanHost);
-
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
         final PrivateDnsPreferenceController privateDnsPreferenceController =
                 new PrivateDnsPreferenceController(context);
 
         if (lifecycle != null) {
-            lifecycle.addObserver(mobilePlanPreferenceController);
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
         }
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        controllers.add(new MobileNetworkSummaryController(context, lifecycle));
         controllers.add(new TetherPreferenceController(context, lifecycle));
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
-        controllers.add(mobilePlanPreferenceController);
         controllers.add(privateDnsPreferenceController);
-        controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
         return controllers;
     }
 
