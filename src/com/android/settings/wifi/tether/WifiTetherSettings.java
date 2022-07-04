@@ -61,8 +61,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     static final String KEY_WIFI_TETHER_SECURITY = "wifi_tether_security";
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_PASSWORD = "wifi_tether_network_password";
-    @VisibleForTesting
-    static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off";
 
     private WifiTetherSwitchBarController mSwitchBarController;
     private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
@@ -185,8 +183,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         controllers.add(new WifiTetherSSIDPreferenceController(context, listener));
         controllers.add(new WifiTetherSecurityPreferenceController(context, listener));
         controllers.add(new WifiTetherPasswordPreferenceController(context, listener));
-        controllers.add(
-                new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
         return controllers;
     }
 
@@ -260,7 +256,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 keys.add(KEY_WIFI_TETHER_NETWORK_NAME);
                 keys.add(KEY_WIFI_TETHER_SECURITY);
                 keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
-                keys.add(KEY_WIFI_TETHER_AUTO_OFF);
             }
 
             // Remove duplicate
