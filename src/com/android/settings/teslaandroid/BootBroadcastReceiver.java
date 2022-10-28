@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.wifi.tether;
+package com.android.settings.teslaandroid;
 
 import static android.net.ConnectivityManager.TETHERING_WIFI;
 
@@ -28,10 +28,8 @@ import android.os.HandlerExecutor;
 import android.os.Looper;
 import com.google.common.annotations.VisibleForTesting;
 
-public class BootHotspotReceiver extends BroadcastReceiver {  
-  
-    private static final String TAG = "BootHotspotReceiver";  
-  
+public class BootBroadcastReceiver extends BroadcastReceiver {  
+    
     @VisibleForTesting  
     final ConnectivityManager.OnStartTetheringCallback mOnStartTetheringCallback =  
             new ConnectivityManager.OnStartTetheringCallback() {  
@@ -43,15 +41,27 @@ public class BootHotspotReceiver extends BroadcastReceiver {
   
     @Override  
     public void onReceive(Context context, Intent intent) {  
-  
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {  
-            Log.d(TAG,"BootHotspotReceiver");  
-  
-            ConnectivityManager mConnectivityManager =  
-                    (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);  
-            mConnectivityManager.startTethering(TETHERING_WIFI, true/* showProvisioningUi */,  
-                    mOnStartTetheringCallback, new Handler(Looper.getMainLooper()));  
+        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {    
+  			startWiFiHotspot(context);
+			launchTeslaAndroidServices(context);
         }  
     }  
+    
+    private void launchTeslaAndroidServices(Context context) {
+    	Intent launchIntent = context
+    		.getPackageManager()
+    		.getLaunchIntentForPackage("eu.gapinski.teslaandroid.audiocapture");
+	if (launchIntent != null) { 
+		launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(launchIntent);
+	}
+    }
+    
+    private void startWiFiHotspot(Context context) {
+    	ConnectivityManager mConnectivityManager =  
+            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);  
+        mConnectivityManager.startTethering(TETHERING_WIFI, true,
+            mOnStartTetheringCallback, new Handler(Looper.getMainLooper()));  
+    }
   
 }  
