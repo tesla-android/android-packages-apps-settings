@@ -4262,7 +4262,7 @@
         
         
         <!-- WTF! Hold my beer :D -->
-        <receiver android:name=".wifi.tether.BootHotspotReceiver"
+        <receiver android:name=".teslaandroid.BootBroadcastReceiver"
         	android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
